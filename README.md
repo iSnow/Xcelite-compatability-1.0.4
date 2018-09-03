@@ -1,4 +1,4 @@
-## Xcelite 1.0.4 compatability testing lib
+## Xcelite 1.0.4 compatibility testing lib
 Not much to see here, the only reason this exists is to have a gold 
 standard for compatiblity tests of new version against the last released
 version 1.0.4
