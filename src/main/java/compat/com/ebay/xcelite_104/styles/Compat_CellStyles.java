@@ -20,7 +20,7 @@ import org.apache.poi.ss.usermodel.DataFormat;
 import org.apache.poi.ss.usermodel.Font;
 import org.apache.poi.ss.usermodel.Workbook;
 
-public final class CellStyles {
+public final class Compat_CellStyles {
   
   private final String DEFAULT_DATE_FORMAT = "ddd mmm dd hh:mm:ss yyy";
   
@@ -28,7 +28,7 @@ public final class CellStyles {
   private CellStyle boldStyle;
   private CellStyle dateStyle;
 
-  public CellStyles(Workbook wb) {
+  public Compat_CellStyles(Workbook wb) {
     this.wb = wb;
     initStyles();
   }

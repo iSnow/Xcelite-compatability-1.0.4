@@ -26,23 +26,23 @@ import java.util.Set;
 
 import compat.com.ebay.xcelite_104.annotate.NoConverterClass;
 import compat.com.ebay.xcelite_104.converters.ColumnValueConverter;
-import compat.com.ebay.xcelite_104.sheet.XceliteSheet;
+import compat.com.ebay.xcelite_104.sheet.Compat_XceliteSheet;
 import org.apache.poi.ss.usermodel.Cell;
 import org.reflections.ReflectionUtils;
 
 import compat.com.ebay.xcelite_104.column.Col;
 import compat.com.ebay.xcelite_104.column.ColumnsExtractor;
-import compat.com.ebay.xcelite_104.styles.CellStylesBank;
+import compat.com.ebay.xcelite_104.styles.Compat_CellStylesBank;
 import com.google.common.collect.Sets;
 
-public class BeanSheetWriter<T> extends SheetWriterAbs<T> {
+public class Compat_BeanSheetWriter<T> extends Compat_SheetWriterAbs<T> {
 
   private final LinkedHashSet<Col> columns;
   private final Col anyColumn;
   private org.apache.poi.ss.usermodel.Row headerRow;
   private int rowIndex = 0;
 
-  public BeanSheetWriter(XceliteSheet sheet, Class<T> type) {
+  public Compat_BeanSheetWriter(Compat_XceliteSheet sheet, Class<T> type) {
     super(sheet, true);
     ColumnsExtractor extractor = new ColumnsExtractor(type);
     extractor.extract();
@@ -114,13 +114,13 @@ public class BeanSheetWriter<T> extends SheetWriterAbs<T> {
       }
     }
     if (col.getDataFormat() != null) {
-      cell.setCellStyle(CellStylesBank.get(sheet.getNativeSheet().getWorkbook()).getCustomDataFormatStyle(
+      cell.setCellStyle(Compat_CellStylesBank.get(sheet.getNativeSheet().getWorkbook()).getCustomDataFormatStyle(
           col.getDataFormat()));
     }
 
     if (col.getType() == Date.class) {
       if (col.getDataFormat() == null) {
-        cell.setCellStyle(CellStylesBank.get(sheet.getNativeSheet().getWorkbook()).getDateStyle());
+        cell.setCellStyle(Compat_CellStylesBank.get(sheet.getNativeSheet().getWorkbook()).getDateStyle());
       }
     }
 
@@ -166,7 +166,7 @@ public class BeanSheetWriter<T> extends SheetWriterAbs<T> {
       if (writeHeader) {
         Cell cell = headerRow.createCell(i);
         cell.setCellType(Cell.CELL_TYPE_STRING);
-        cell.setCellStyle(CellStylesBank.get(sheet.getNativeSheet().getWorkbook()).getBoldStyle());
+        cell.setCellStyle(Compat_CellStylesBank.get(sheet.getNativeSheet().getWorkbook()).getBoldStyle());
         cell.setCellValue(column.getName());
         i++;
       }

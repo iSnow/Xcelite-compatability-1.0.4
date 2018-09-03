@@ -17,9 +17,9 @@ package compat.com.ebay.xcelite_104.reader;
 
 import java.util.Collection;
 
-import compat.com.ebay.xcelite_104.sheet.XceliteSheet;
+import compat.com.ebay.xcelite_104.sheet.Compat_XceliteSheet;
 
-public interface SheetReader<T> {
+public interface Compat_SheetReader<T> {
 
   /**
    * Reads the sheet and returns a collection of the specified type.
@@ -40,7 +40,7 @@ public interface SheetReader<T> {
    * 
    * @return the sheet
    */
-  XceliteSheet getSheet();
+  Compat_XceliteSheet getSheet();
 
   /**
    * Adds a row post processor. The row post processors will be executed in
@@ -48,12 +48,12 @@ public interface SheetReader<T> {
    * 
    * @param rowPostProcessor the post row processor to add
    */
-  void addRowPostProcessor(RowPostProcessor<T> rowPostProcessor);
+  void addRowPostProcessor(Compat_RowPostProcessor<T> rowPostProcessor);
   
   /**
    * Removes a row post processor.
    * 
    * @param rowPostProcessor the post row processor to remove
    */
-  void removeRowPostProcessor(RowPostProcessor<T> rowPostProcessor);
+  void removeRowPostProcessor(Compat_RowPostProcessor<T> rowPostProcessor);
 }

@@ -20,12 +20,12 @@ import java.util.Collection;
 
 import org.apache.poi.ss.usermodel.Sheet;
 
-import compat.com.ebay.xcelite_104.reader.SheetReader;
-import compat.com.ebay.xcelite_104.reader.BeanSheetReader;
-import compat.com.ebay.xcelite_104.reader.SimpleSheetReader;
-import compat.com.ebay.xcelite_104.writer.SheetWriter;
-import compat.com.ebay.xcelite_104.writer.BeanSheetWriter;
-import compat.com.ebay.xcelite_104.writer.SimpleSheetWriter;
+import compat.com.ebay.xcelite_104.reader.Compat_SheetReader;
+import compat.com.ebay.xcelite_104.reader.Compat_BeanSheetReader;
+import compat.com.ebay.xcelite_104.reader.Compat_SimpleSheetReader;
+import compat.com.ebay.xcelite_104.writer.Compat_SheetWriter;
+import compat.com.ebay.xcelite_104.writer.Compat_BeanSheetWriter;
+import compat.com.ebay.xcelite_104.writer.Compat_SimpleSheetWriter;
 
 /**
  * Class description...
@@ -34,16 +34,16 @@ import compat.com.ebay.xcelite_104.writer.SimpleSheetWriter;
  * creation_date Nov 9, 2013
  * 
  */
-public class XceliteSheetImpl implements XceliteSheet {
+public class Compat_XceliteSheetImpl implements Compat_XceliteSheet {
 
   private final Sheet sheet;
   private final File file;
 
-  public XceliteSheetImpl(Sheet sheet) {
+  public Compat_XceliteSheetImpl(Sheet sheet) {
     this(sheet, null);
   }
   
-  public XceliteSheetImpl(Sheet sheet, File file) {
+  public Compat_XceliteSheetImpl(Sheet sheet, File file) {
     this.sheet = sheet;
     this.file = file;
   }
@@ -59,22 +59,22 @@ public class XceliteSheetImpl implements XceliteSheet {
   }
 
   @Override
-  public <T> SheetWriter<T> getBeanWriter(Class<T> type) {
-    return new BeanSheetWriter<T>(this, type);
+  public <T> Compat_SheetWriter<T> getBeanWriter(Class<T> type) {
+    return new Compat_BeanSheetWriter<T>(this, type);
   }
 
   @Override
-  public <T> SheetReader<T> getBeanReader(Class<T> type) {
-    return new BeanSheetReader<T>(this, type);
+  public <T> Compat_SheetReader<T> getBeanReader(Class<T> type) {
+    return new Compat_BeanSheetReader<T>(this, type);
   } 
 
   @Override
-  public SimpleSheetWriter getSimpleWriter() {
-    return new SimpleSheetWriter(this);
+  public Compat_SimpleSheetWriter getSimpleWriter() {
+    return new Compat_SimpleSheetWriter(this);
   }
 
   @Override
-  public SheetReader<Collection<Object>> getSimpleReader() {
-    return new SimpleSheetReader(this);
+  public Compat_SheetReader<Collection<Object>> getSimpleReader() {
+    return new Compat_SimpleSheetReader(this);
   }
 }

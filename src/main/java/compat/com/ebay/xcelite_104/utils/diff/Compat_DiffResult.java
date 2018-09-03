@@ -13,35 +13,32 @@
    See the License for the specific language governing permissions and
    limitations under the License.
 */
-package compat.com.ebay.xcelite_104.styles;
+package compat.com.ebay.xcelite_104.utils.diff;
 
-import java.util.Map;
-
-import org.apache.poi.ss.usermodel.Workbook;
-
-import com.google.common.collect.Maps;
+import java.util.Collection;
 
 /**
  * Class description...
  * 
  * @author kharel (kharel@ebay.com)
- * creation_date Sep 9, 2013
+ * creation_date Nov 20, 2013
  * 
  */
-public final class CellStylesBank {
+public interface Compat_DiffResult<T> {
 
-  private static Map<Workbook, CellStyles> cellStylesMap;
+  /**
+   * Whether or not the two sheets are identical.
+   * 
+   * @return true if both sheets are identical, false otherwise
+   */
+  boolean isIdentical();
 
-  static {
-    cellStylesMap = Maps.newHashMap();
-  }
+  /**
+   * Gets a collection which represents the difference between two sheets.
+   * 
+   * @return the diff collection. If there is no difference, collection is returned empty
+   */
+  Collection<T> getDifference();
 
-  public static CellStyles get(Workbook workbook) {
-    if (cellStylesMap.containsKey(workbook)) {
-      return cellStylesMap.get(workbook);
-    }
-    CellStyles cellStyles = new CellStyles(workbook);
-    cellStylesMap.put(workbook, cellStyles);
-    return cellStyles;
-  }
+  String getReport();
 }

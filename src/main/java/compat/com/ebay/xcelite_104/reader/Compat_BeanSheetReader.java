@@ -30,7 +30,7 @@ import compat.com.ebay.xcelite_104.annotate.NoConverterClass;
 import compat.com.ebay.xcelite_104.annotations.AnyColumn;
 import compat.com.ebay.xcelite_104.converters.ColumnValueConverter;
 import compat.com.ebay.xcelite_104.exceptions.XceliteException;
-import compat.com.ebay.xcelite_104.sheet.XceliteSheet;
+import compat.com.ebay.xcelite_104.sheet.Compat_XceliteSheet;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.DateUtil;
 import org.apache.poi.ss.usermodel.Row;
@@ -49,7 +49,7 @@ import com.google.common.collect.Sets;
  * creation_date Sep 9, 2013
  * 
  */
-public class BeanSheetReader<T> extends SheetReaderAbs<T> {
+public class Compat_BeanSheetReader<T> extends Compat_SheetReaderAbs<T> {
 
   private final LinkedHashSet<Col> columns;
   private final Col anyColumn;
@@ -58,7 +58,7 @@ public class BeanSheetReader<T> extends SheetReaderAbs<T> {
   private LinkedHashSet<String> header;
   private Iterator<Row> rowIterator;
 
-  public BeanSheetReader(XceliteSheet sheet, Class<T> type) {
+  public Compat_BeanSheetReader(Compat_XceliteSheet sheet, Class<T> type) {
     super(sheet, false);
     this.type = type;
     ColumnsExtractor extractor = new ColumnsExtractor(type);
@@ -99,7 +99,7 @@ public class BeanSheetReader<T> extends SheetReaderAbs<T> {
           i++;
         }
         boolean keepObject = true;
-        for (RowPostProcessor<T> rowPostProcessor : rowPostProcessors) {
+        for (Compat_RowPostProcessor<T> rowPostProcessor : rowPostProcessors) {
           keepObject = rowPostProcessor.process(object);
           if (!keepObject) break;
         }

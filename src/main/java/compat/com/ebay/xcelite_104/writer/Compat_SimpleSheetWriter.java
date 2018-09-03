@@ -17,11 +17,11 @@ package compat.com.ebay.xcelite_104.writer;
 
 import java.util.Collection;
 
-import compat.com.ebay.xcelite_104.sheet.XceliteSheet;
+import compat.com.ebay.xcelite_104.sheet.Compat_XceliteSheet;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 
-import compat.com.ebay.xcelite_104.styles.CellStylesBank;
+import compat.com.ebay.xcelite_104.styles.Compat_CellStylesBank;
 
 /**
  * Class description...
@@ -30,9 +30,9 @@ import compat.com.ebay.xcelite_104.styles.CellStylesBank;
  * creation_date Nov 10, 2013
  * 
  */
-public class SimpleSheetWriter extends SheetWriterAbs<Collection<Object>> {
+public class Compat_SimpleSheetWriter extends Compat_SheetWriterAbs<Collection<Object>> {
   
-  public SimpleSheetWriter(XceliteSheet sheet) {
+  public Compat_SimpleSheetWriter(Compat_XceliteSheet sheet) {
     super(sheet, false);
   }
 
@@ -45,7 +45,7 @@ public class SimpleSheetWriter extends SheetWriterAbs<Collection<Object>> {
       for (Object column : row) {
         Cell cell = excelRow.createCell(j);
         if (writeHeader && i == 0) {
-          cell.setCellStyle(CellStylesBank.get(sheet.getNativeSheet().getWorkbook()).getBoldStyle());
+          cell.setCellStyle(Compat_CellStylesBank.get(sheet.getNativeSheet().getWorkbook()).getBoldStyle());
         }
         writeToCell(cell, column, null);        
         ++j;

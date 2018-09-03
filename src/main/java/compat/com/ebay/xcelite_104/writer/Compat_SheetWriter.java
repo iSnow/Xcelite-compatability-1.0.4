@@ -17,13 +17,13 @@ package compat.com.ebay.xcelite_104.writer;
 
 import java.util.Collection;
 
-import compat.com.ebay.xcelite_104.sheet.XceliteSheet;
+import compat.com.ebay.xcelite_104.sheet.Compat_XceliteSheet;
 
-public interface SheetWriter<T> {
+public interface Compat_SheetWriter<T> {
 
   void write(Collection<T> data);
   
   void generateHeaderRow(boolean generateHeaderRow);
   
-  XceliteSheet getSheet();
+  Compat_XceliteSheet getSheet();
 }

@@ -13,29 +13,35 @@
    See the License for the specific language governing permissions and
    limitations under the License.
 */
-package compat.com.ebay.xcelite_104.sheet;
+package compat.com.ebay.xcelite_104.styles;
 
-import java.io.File;
-import java.util.Collection;
+import java.util.Map;
 
-import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Workbook;
 
-import compat.com.ebay.xcelite_104.reader.SheetReader;
-import compat.com.ebay.xcelite_104.writer.SheetWriter;
+import com.google.common.collect.Maps;
 
 /**
  * Class description...
- *
+ * 
  * @author kharel (kharel@ebay.com)
- * creation_date Nov 9, 2013
+ * creation_date Sep 9, 2013
  * 
  */
-public interface XceliteSheet {
+public final class Compat_CellStylesBank {
 
-  <T> SheetWriter<T> getBeanWriter(Class<T> type);
-  <T> SheetReader<T> getBeanReader(Class<T> type);
-  SheetWriter<Collection<Object>> getSimpleWriter();
-  SheetReader<Collection<Object>> getSimpleReader();
-  Sheet getNativeSheet();
-  File getFile();
+  private static Map<Workbook, Compat_CellStyles> cellStylesMap;
+
+  static {
+    cellStylesMap = Maps.newHashMap();
+  }
+
+  public static Compat_CellStyles get(Workbook workbook) {
+    if (cellStylesMap.containsKey(workbook)) {
+      return cellStylesMap.get(workbook);
+    }
+    Compat_CellStyles cellStyles = new Compat_CellStyles(workbook);
+    cellStylesMap.put(workbook, cellStyles);
+    return cellStyles;
+  }
 }

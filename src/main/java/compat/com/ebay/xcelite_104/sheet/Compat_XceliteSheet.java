@@ -13,32 +13,29 @@
    See the License for the specific language governing permissions and
    limitations under the License.
 */
-package compat.com.ebay.xcelite_104.utils.diff;
+package compat.com.ebay.xcelite_104.sheet;
 
+import java.io.File;
 import java.util.Collection;
+
+import org.apache.poi.ss.usermodel.Sheet;
+
+import compat.com.ebay.xcelite_104.reader.Compat_SheetReader;
+import compat.com.ebay.xcelite_104.writer.Compat_SheetWriter;
 
 /**
  * Class description...
- * 
+ *
  * @author kharel (kharel@ebay.com)
- * creation_date Nov 20, 2013
+ * creation_date Nov 9, 2013
  * 
  */
-public interface DiffResult<T> {
+public interface Compat_XceliteSheet {
 
-  /**
-   * Whether or not the two sheets are identical.
-   * 
-   * @return true if both sheets are identical, false otherwise
-   */
-  boolean isIdentical();
-
-  /**
-   * Gets a collection which represents the difference between two sheets.
-   * 
-   * @return the diff collection. If there is no difference, collection is returned empty
-   */
-  Collection<T> getDifference();
-
-  String getReport();
+  <T> Compat_SheetWriter<T> getBeanWriter(Class<T> type);
+  <T> Compat_SheetReader<T> getBeanReader(Class<T> type);
+  Compat_SheetWriter<Collection<Object>> getSimpleWriter();
+  Compat_SheetReader<Collection<Object>> getSimpleReader();
+  Sheet getNativeSheet();
+  File getFile();
 }

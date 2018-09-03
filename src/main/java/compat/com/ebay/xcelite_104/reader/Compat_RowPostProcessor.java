@@ -23,7 +23,7 @@ package compat.com.ebay.xcelite_104.reader;
  * creation_date Feb 2, 2014
  * 
  */
-public interface RowPostProcessor<T> {
+public interface Compat_RowPostProcessor<T> {
 
   /**
    * Allows you to manipulate the object right after it was deserialized from row.

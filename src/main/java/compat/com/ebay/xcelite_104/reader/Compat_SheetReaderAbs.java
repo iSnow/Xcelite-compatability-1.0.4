@@ -17,7 +17,7 @@ package compat.com.ebay.xcelite_104.reader;
 
 import java.util.List;
 
-import compat.com.ebay.xcelite_104.sheet.XceliteSheet;
+import compat.com.ebay.xcelite_104.sheet.Compat_XceliteSheet;
 import org.apache.poi.ss.usermodel.Cell;
 
 import com.google.common.collect.Lists;
@@ -29,13 +29,13 @@ import com.google.common.collect.Lists;
  * creation_date Nov 11, 2013
  * 
  */
-public abstract class SheetReaderAbs<T> implements SheetReader<T> {
+public abstract class Compat_SheetReaderAbs<T> implements Compat_SheetReader<T> {
 
-  protected final XceliteSheet sheet;
-  protected final List<RowPostProcessor<T>> rowPostProcessors;
+  protected final Compat_XceliteSheet sheet;
+  protected final List<Compat_RowPostProcessor<T>> rowPostProcessors;
   protected boolean skipHeader;
   
-  public SheetReaderAbs(XceliteSheet sheet, boolean skipHeader) {
+  public Compat_SheetReaderAbs(Compat_XceliteSheet sheet, boolean skipHeader) {
     this.sheet = sheet;
     this.skipHeader = skipHeader;
     rowPostProcessors = Lists.newArrayList();
@@ -63,17 +63,17 @@ public abstract class SheetReaderAbs<T> implements SheetReader<T> {
   }
 
   @Override
-  public XceliteSheet getSheet() {
+  public Compat_XceliteSheet getSheet() {
     return sheet;
   }
   
   @Override
-  public void addRowPostProcessor(RowPostProcessor<T> rowPostProcessor) {
+  public void addRowPostProcessor(Compat_RowPostProcessor<T> rowPostProcessor) {
     rowPostProcessors.add(rowPostProcessor);
   }
   
   @Override
-  public void removeRowPostProcessor(RowPostProcessor<T> rowPostProcessor) {
+  public void removeRowPostProcessor(Compat_RowPostProcessor<T> rowPostProcessor) {
     rowPostProcessors.remove(rowPostProcessor);
   }
 }

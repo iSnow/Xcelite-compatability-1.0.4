@@ -22,8 +22,8 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
-import compat.com.ebay.xcelite_104.sheet.XceliteSheet;
-import compat.com.ebay.xcelite_104.sheet.XceliteSheetImpl;
+import compat.com.ebay.xcelite_104.sheet.Compat_XceliteSheet;
+import compat.com.ebay.xcelite_104.sheet.Compat_XceliteSheetImpl;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
@@ -37,16 +37,16 @@ import compat.com.ebay.xcelite_104.exceptions.XceliteException;
  * creation_date Nov 9, 2013
  * 
  */
-public class Xcelite {
+public class Compat_Xcelite {
 
   private final Workbook workbook;
   private File file;
 
-  public Xcelite() {
+  public Compat_Xcelite() {
     workbook = new XSSFWorkbook();
   }
 
-  public Xcelite(File file) {
+  public Compat_Xcelite(File file) {
     try {
       this.file = file;
       workbook = new XSSFWorkbook(new FileInputStream(file));
@@ -62,8 +62,8 @@ public class Xcelite {
    * 
    * @return XceliteSheet object
    */
-  public XceliteSheet createSheet() {
-    return new XceliteSheetImpl(workbook.createSheet(), file);
+  public Compat_XceliteSheet createSheet() {
+    return new Compat_XceliteSheetImpl(workbook.createSheet(), file);
   }
 
   /**
@@ -72,8 +72,8 @@ public class Xcelite {
    * @param name the sheet name   * 
    * @return XceliteSheet object
    */
-  public XceliteSheet createSheet(String name) {
-    return new XceliteSheetImpl(workbook.createSheet(name), file);
+  public Compat_XceliteSheet createSheet(String name) {
+    return new Compat_XceliteSheetImpl(workbook.createSheet(name), file);
   }
 
   /**
@@ -82,12 +82,12 @@ public class Xcelite {
    * @param sheetIndex the sheet index
    * @return XceliteSheet object
    */
-  public XceliteSheet getSheet(int sheetIndex) {
+  public Compat_XceliteSheet getSheet(int sheetIndex) {
     Sheet sheet = workbook.getSheetAt(sheetIndex);
     if (sheet == null) {
       throw new XceliteException(String.format("Could not find sheet at index %s", sheetIndex));
     }
-    return new XceliteSheetImpl(sheet, file);
+    return new Compat_XceliteSheetImpl(sheet, file);
   }
 
   /**
@@ -96,12 +96,12 @@ public class Xcelite {
    * @param sheetName the sheet name
    * @return XceliteSheet object
    */
-  public XceliteSheet getSheet(String sheetName) {
+  public Compat_XceliteSheet getSheet(String sheetName) {
     Sheet sheet = workbook.getSheet(sheetName);
     if (sheet == null) {
       throw new XceliteException(String.format("Could not find sheet named \"%s\"", sheetName));
     }
-    return new XceliteSheetImpl(sheet, file);
+    return new Compat_XceliteSheetImpl(sheet, file);
   }
 
   /**

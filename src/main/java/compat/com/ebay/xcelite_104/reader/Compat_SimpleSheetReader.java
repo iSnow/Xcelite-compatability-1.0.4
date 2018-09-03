@@ -19,7 +19,7 @@ import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 
-import compat.com.ebay.xcelite_104.sheet.XceliteSheet;
+import compat.com.ebay.xcelite_104.sheet.Compat_XceliteSheet;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 
@@ -32,9 +32,9 @@ import com.google.common.collect.Lists;
  * creation_date Nov 8, 2013
  * 
  */
-public class SimpleSheetReader extends SheetReaderAbs<Collection<Object>> {
+public class Compat_SimpleSheetReader extends Compat_SheetReaderAbs<Collection<Object>> {
 
-  public SimpleSheetReader(XceliteSheet sheet) {
+  public Compat_SimpleSheetReader(Compat_XceliteSheet sheet) {
     super(sheet, false);
   }
 
@@ -61,7 +61,7 @@ public class SimpleSheetReader extends SheetReaderAbs<Collection<Object>> {
       }
       if (blankRow) continue;
       boolean keepRow = true;
-      for (RowPostProcessor<Collection<Object>> rowPostProcessor : rowPostProcessors) {
+      for (Compat_RowPostProcessor<Collection<Object>> rowPostProcessor : rowPostProcessors) {
         keepRow = rowPostProcessor.process(row);
         if (!keepRow) break;
       }

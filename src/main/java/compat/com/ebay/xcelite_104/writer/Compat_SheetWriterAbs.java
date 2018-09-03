@@ -17,7 +17,7 @@ package compat.com.ebay.xcelite_104.writer;
 
 import java.util.Date;
 
-import compat.com.ebay.xcelite_104.sheet.XceliteSheet;
+import compat.com.ebay.xcelite_104.sheet.Compat_XceliteSheet;
 import org.apache.poi.ss.usermodel.Cell;
 
 /**
@@ -27,12 +27,12 @@ import org.apache.poi.ss.usermodel.Cell;
  * creation_date Nov 10, 2013
  * 
  */
-public abstract class SheetWriterAbs<T> implements SheetWriter<T> {
+public abstract class Compat_SheetWriterAbs<T> implements Compat_SheetWriter<T> {
   
-  protected XceliteSheet sheet;
+  protected Compat_XceliteSheet sheet;
   protected boolean writeHeader;
   
-  public SheetWriterAbs(XceliteSheet sheet, boolean writeHeader) {
+  public Compat_SheetWriterAbs(Compat_XceliteSheet sheet, boolean writeHeader) {
     this.sheet = sheet;
     this.writeHeader = writeHeader;
   }
@@ -63,7 +63,7 @@ public abstract class SheetWriterAbs<T> implements SheetWriter<T> {
   }
   
   @Override
-  public XceliteSheet getSheet() {
+  public Compat_XceliteSheet getSheet() {
     return sheet;
   }
 }

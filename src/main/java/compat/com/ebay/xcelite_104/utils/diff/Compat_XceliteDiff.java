@@ -22,7 +22,7 @@ import javax.annotation.Nonnull;
 import compat.com.ebay.xcelite_104.utils.diff.info.Sheets;
 import org.apache.commons.collections.CollectionUtils;
 
-import compat.com.ebay.xcelite_104.reader.SheetReader;
+import compat.com.ebay.xcelite_104.reader.Compat_SheetReader;
 import compat.com.ebay.xcelite_104.utils.diff.info.Collections;
 import compat.com.ebay.xcelite_104.utils.diff.info.Files;
 import compat.com.ebay.xcelite_104.utils.diff.info.Info;
@@ -37,11 +37,11 @@ import compat.com.ebay.xcelite_104.utils.diff.report.ReportInfo;
  * creation_date Nov 1, 2013
  * 
  */
-public final class XceliteDiff {
+public final class Compat_XceliteDiff {
 
   private static final String NEW_LINE = System.getProperty("line.separator");
 
-  private XceliteDiff() {
+  private Compat_XceliteDiff() {
   }
 
   /**
@@ -53,7 +53,7 @@ public final class XceliteDiff {
    * @param b the second sheet
    * @return DiffResult object which holds the diff result
    */
-  public static <T> DiffResult<T> diff(@Nonnull SheetReader<T> a, @Nonnull SheetReader<T> b) {
+  public static <T> Compat_DiffResult<T> diff(@Nonnull Compat_SheetReader<T> a, @Nonnull Compat_SheetReader<T> b) {
     return diff(a, b, null);
   }
 
@@ -68,8 +68,8 @@ public final class XceliteDiff {
    * @return DiffResult object which holds the diff result
    */
   @SuppressWarnings("unchecked")
-  public static <T> DiffResult<T> diff(@Nonnull SheetReader<T> a, @Nonnull SheetReader<T> b,
-      ReportGenerator reportGenerator) {
+  public static <T> Compat_DiffResult<T> diff(@Nonnull Compat_SheetReader<T> a, @Nonnull Compat_SheetReader<T> b,
+                                              ReportGenerator reportGenerator) {
     Collection<T> ca = a.read();
     Collection<T> cb = b.read();
     Collection<T> disjunction = CollectionUtils.disjunction(ca, cb);
@@ -85,7 +85,7 @@ public final class XceliteDiff {
     return new DiffResultImpl<T>(disjunction, reporter.generateReport(info));
   }
 
-  private static class DiffResultImpl<T> implements DiffResult<T> {
+  private static class DiffResultImpl<T> implements Compat_DiffResult<T> {
 
     private final Collection<T> diff;
     private final boolean isIdentical;
