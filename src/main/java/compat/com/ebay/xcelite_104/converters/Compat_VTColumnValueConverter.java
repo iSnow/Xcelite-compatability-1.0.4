@@ -20,19 +20,21 @@ import java.util.Collection;
 import com.google.common.collect.Lists;
 
 /**
- * Serializes a Collection object to a comma separated String. Deserializes a
- * comma separated String to an ArrayList. If a different Collection is required
- * other than {@link java.util.ArrayList ArrayList}, extend this class to
- * override {@link #getCollection(Iterable)} method.
+ * Serializes a Collection object to a VT separated String. 
+ * Deserializes a VT separated String to an ArrayList. If a different Collection is required
+ * other than {@link java.util.ArrayList}, extend this class to override {@link #getCollection(Iterable)} method.
  * 
  * @author kharel (kharel@ebay.com)
  * creation_date Sep 14, 2013
+ * 
  */
-public class CSVColumnValueConverter extends DelimiterColumnValueConverter {
+public class Compat_VTColumnValueConverter extends Compat_DelimiterColumnValueConverter {
 
+  private static final String VT = "\013";
+  
   @Override
   protected String getDelimiter() {
-    return ",";
+    return VT;
   }
 
   @Override

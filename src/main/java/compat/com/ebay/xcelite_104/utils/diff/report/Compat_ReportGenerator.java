@@ -13,26 +13,18 @@
    See the License for the specific language governing permissions and
    limitations under the License.
 */
-package compat.com.ebay.xcelite_104.annotate;
+package compat.com.ebay.xcelite_104.utils.diff.report;
 
-import compat.com.ebay.xcelite_104.converters.ColumnValueConverter;
+import compat.com.ebay.xcelite_104.utils.diff.info.Compat_Info;
 
 /**
- * Marker class.
- * 
+ * Class description...
+ *
  * @author kharel (kharel@ebay.com)
- * creation_date Sep 12, 2013
+ * creation_date Nov 21, 2013
  * 
  */
-public final class NoConverterClass implements ColumnValueConverter<Object, Object> {
+public interface Compat_ReportGenerator {
 
-  @Override
-  public Object serialize(Object value) {
-    return value;
-  }
-
-  @Override
-  public Object deserialize(Object value) {
-    return value;
-  }
+  <T> String generateReport(Compat_Info<T> info);
 }

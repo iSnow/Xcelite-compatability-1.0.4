@@ -13,15 +13,30 @@
    See the License for the specific language governing permissions and
    limitations under the License.
 */
-package compat.com.ebay.xcelite_104.annotate;
+package compat.com.ebay.xcelite_104.converters;
 
 /**
- * Marker class.
- *
+ * Abstraction of generic column value converter.
+ * 
  * @author kharel (kharel@ebay.com)
- * creation_date Aug 29, 2013
+ * creation_date Sep 12, 2013
  * 
  */
-public final class NoClass {
-  private NoClass() { }
+public interface Compat_ColumnValueConverter<T, V> {
+
+  /**
+   * Serializes given value to a different type.
+   * 
+   * @param value the value to serialize
+   * @return the serialized value
+   */
+  T serialize(V value);
+  
+  /**
+   * Deserializes given value to a different type.
+   * 
+   * @param value the value to deserialize
+   * @return the deserialized value
+   */
+  V deserialize(T value);
 }

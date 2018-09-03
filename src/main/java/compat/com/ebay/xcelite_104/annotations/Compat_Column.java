@@ -20,8 +20,8 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
-import compat.com.ebay.xcelite_104.annotate.NoConverterClass;
-import compat.com.ebay.xcelite_104.converters.ColumnValueConverter;
+import compat.com.ebay.xcelite_104.annotate.Compat_NoConverterClass;
+import compat.com.ebay.xcelite_104.converters.Compat_ColumnValueConverter;
 
 /**
  * Annotation to annotate a field to represent a column in excel file.
@@ -32,7 +32,7 @@ import compat.com.ebay.xcelite_104.converters.ColumnValueConverter;
  */
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ ElementType.FIELD })
-public @interface Column {
+public @interface Compat_Column {
   
   /**
    * The actual name of the column that will be written to excel file. If no
@@ -59,8 +59,8 @@ public @interface Column {
    * Converter class to use when serializing/deserializing the data. Class must
    * implement
    * @return asd
-   * {@link ColumnValueConverter
+   * {@link Compat_ColumnValueConverter
    * ColumnValueConverter}. Default is no converter.
    */
-  Class<? extends ColumnValueConverter<?, ?>> converter() default NoConverterClass.class;
+  Class<? extends Compat_ColumnValueConverter<?, ?>> converter() default Compat_NoConverterClass.class;
 }

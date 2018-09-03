@@ -26,19 +26,19 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import compat.com.ebay.xcelite_104.annotate.NoConverterClass;
-import compat.com.ebay.xcelite_104.annotations.AnyColumn;
-import compat.com.ebay.xcelite_104.converters.ColumnValueConverter;
-import compat.com.ebay.xcelite_104.exceptions.XceliteException;
+import compat.com.ebay.xcelite_104.annotate.Compat_NoConverterClass;
+import compat.com.ebay.xcelite_104.annotations.Compat_AnyColumn;
+import compat.com.ebay.xcelite_104.converters.Compat_ColumnValueConverter;
+import compat.com.ebay.xcelite_104.exceptions.Compat_XceliteException;
 import compat.com.ebay.xcelite_104.sheet.Compat_XceliteSheet;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.DateUtil;
 import org.apache.poi.ss.usermodel.Row;
 import org.reflections.ReflectionUtils;
 
-import compat.com.ebay.xcelite_104.column.Col;
-import compat.com.ebay.xcelite_104.column.ColumnsExtractor;
-import compat.com.ebay.xcelite_104.column.ColumnsMapper;
+import compat.com.ebay.xcelite_104.column.Compat_Col;
+import compat.com.ebay.xcelite_104.column.Compat_ColumnsExtractor;
+import compat.com.ebay.xcelite_104.column.Compat_ColumnsMapper;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 
@@ -51,9 +51,9 @@ import com.google.common.collect.Sets;
  */
 public class Compat_BeanSheetReader<T> extends Compat_SheetReaderAbs<T> {
 
-  private final LinkedHashSet<Col> columns;
-  private final Col anyColumn;
-  private final ColumnsMapper mapper;  
+  private final LinkedHashSet<Compat_Col> columns;
+  private final Compat_Col anyColumn;
+  private final Compat_ColumnsMapper mapper;
   private final Class<T> type;
   private LinkedHashSet<String> header;
   private Iterator<Row> rowIterator;
@@ -61,11 +61,11 @@ public class Compat_BeanSheetReader<T> extends Compat_SheetReaderAbs<T> {
   public Compat_BeanSheetReader(Compat_XceliteSheet sheet, Class<T> type) {
     super(sheet, false);
     this.type = type;
-    ColumnsExtractor extractor = new ColumnsExtractor(type);
+    Compat_ColumnsExtractor extractor = new Compat_ColumnsExtractor(type);
     extractor.extract();
     columns = extractor.getColumns(); 
     anyColumn = extractor.getAnyColumn();    
-    mapper = new ColumnsMapper(columns);
+    mapper = new Compat_ColumnsMapper(columns);
   }
 
   @SuppressWarnings("unchecked")
@@ -82,7 +82,7 @@ public class Compat_BeanSheetReader<T> extends Compat_SheetReaderAbs<T> {
         int i = 0;
         for (String columnName : header) {
           Cell cell = row.getCell(i, Row.RETURN_BLANK_AS_NULL);
-          Col col = mapper.getColumn(columnName);
+          Compat_Col col = mapper.getColumn(columnName);
           if (col == null) {            
             if (anyColumn != null) {
               Set<Field> fields = ReflectionUtils.getAllFields(object.getClass(), withName(anyColumn.getFieldName()));
@@ -128,7 +128,7 @@ public class Compat_BeanSheetReader<T> extends Compat_SheetReaderAbs<T> {
   }
 
   private boolean isColumnInIgnoreList(Field anyColumnField, String columnName) {
-    AnyColumn annotation = anyColumnField.getAnnotation(AnyColumn.class);
+    Compat_AnyColumn annotation = anyColumnField.getAnnotation(Compat_AnyColumn.class);
     Set<String> ignoreCols = Sets.newHashSet(annotation.ignoreCols());    
     return ignoreCols.contains(columnName);
   }
@@ -139,14 +139,14 @@ public class Compat_BeanSheetReader<T> extends Compat_SheetReaderAbs<T> {
       field.setAccessible(true);
       Object value = readValueFromCell(cell);
       if (value != null) {
-        AnyColumn annotation = field.getAnnotation(AnyColumn.class);
+        Compat_AnyColumn annotation = field.getAnnotation(Compat_AnyColumn.class);
         if (field.get(object) == null) {
           Map<String, Object> map = (Map<String, Object>) annotation.as().newInstance();
           field.set(object, map);
         }
         Map<String, Object> map = (Map<String, Object>) field.get(object);        
-        if (annotation.converter() != NoConverterClass.class) {
-          ColumnValueConverter<Object, ?> converter = (ColumnValueConverter<Object, ?>) annotation.converter()
+        if (annotation.converter() != Compat_NoConverterClass.class) {
+          Compat_ColumnValueConverter<Object, ?> converter = (Compat_ColumnValueConverter<Object, ?>) annotation.converter()
               .newInstance();
           value = converter.deserialize(value);
         }       
@@ -162,12 +162,12 @@ public class Compat_BeanSheetReader<T> extends Compat_SheetReaderAbs<T> {
   }
 
   @SuppressWarnings("unchecked")
-  private void writeToField(Field field, T object, Cell cell, Col column) {
+  private void writeToField(Field field, T object, Cell cell, Compat_Col column) {
     try {   
       Object cellValue = readValueFromCell(cell);      
       if (cellValue != null) {
         if (column.getConverter() != null) {
-          ColumnValueConverter<Object, ?> converter = (ColumnValueConverter<Object, ?>) column.getConverter()
+          Compat_ColumnValueConverter<Object, ?> converter = (Compat_ColumnValueConverter<Object, ?>) column.getConverter()
               .newInstance();
           cellValue = converter.deserialize(cellValue);
         } else {
@@ -215,7 +215,7 @@ public class Compat_BeanSheetReader<T> extends Compat_SheetReaderAbs<T> {
     rowIterator = sheet.getNativeSheet().rowIterator();
     Row row = rowIterator.next();
     if (row == null) {
-      throw new XceliteException("First row in sheet is empty. First row must contain header");
+      throw new Compat_XceliteException("First row in sheet is empty. First row must contain header");
     }
     Iterator<Cell> itr = row.cellIterator();
     while (itr.hasNext()) {

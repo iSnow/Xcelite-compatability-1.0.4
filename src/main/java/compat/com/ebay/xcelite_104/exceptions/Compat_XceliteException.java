@@ -22,19 +22,19 @@ package compat.com.ebay.xcelite_104.exceptions;
  * creation_date Sep 9, 2013
  * 
  */
-public class XceliteException extends RuntimeException {
+public class Compat_XceliteException extends RuntimeException {
 
   private static final long serialVersionUID = 1L;
 
-  public XceliteException(String message) {
+  public Compat_XceliteException(String message) {
     super(message);
   }
 
-  public XceliteException(Exception exception) {
+  public Compat_XceliteException(Exception exception) {
     super(exception);
   }
 
-  public XceliteException(String message, Exception exception) {
+  public Compat_XceliteException(String message, Exception exception) {
     super(message, exception);
   }
 }

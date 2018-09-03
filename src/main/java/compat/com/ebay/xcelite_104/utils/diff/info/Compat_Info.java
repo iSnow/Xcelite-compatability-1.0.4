@@ -15,6 +15,7 @@
 */
 package compat.com.ebay.xcelite_104.utils.diff.info;
 
+
 /**
  * Class description...
  *
@@ -22,21 +23,9 @@ package compat.com.ebay.xcelite_104.utils.diff.info;
  * creation_date Nov 21, 2013
  * 
  */
-public class Files {
+public interface Compat_Info<T> {
 
-  private final String aFile;
-  private final String bFile;
-
-  public Files(String aFile, String bFile) {
-    this.aFile = aFile;
-    this.bFile = bFile;
-  }
-
-  public String aFile() {
-    return aFile;
-  }
-
-  public String bFile() {
-    return bFile;
-  }  
+  Compat_Files files();
+  Compat_Sheets sheets();
+  Compat_Collections<T> collections();
 }

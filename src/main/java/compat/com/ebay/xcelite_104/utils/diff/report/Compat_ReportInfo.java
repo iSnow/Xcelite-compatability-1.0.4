@@ -15,10 +15,10 @@
 */
 package compat.com.ebay.xcelite_104.utils.diff.report;
 
-import compat.com.ebay.xcelite_104.utils.diff.info.Sheets;
-import compat.com.ebay.xcelite_104.utils.diff.info.Collections;
-import compat.com.ebay.xcelite_104.utils.diff.info.Files;
-import compat.com.ebay.xcelite_104.utils.diff.info.Info;
+import compat.com.ebay.xcelite_104.utils.diff.info.Compat_Sheets;
+import compat.com.ebay.xcelite_104.utils.diff.info.Compat_Collections;
+import compat.com.ebay.xcelite_104.utils.diff.info.Compat_Files;
+import compat.com.ebay.xcelite_104.utils.diff.info.Compat_Info;
 
 /**
  * Class description...
@@ -27,30 +27,30 @@ import compat.com.ebay.xcelite_104.utils.diff.info.Info;
  * creation_date Nov 21, 2013
  * 
  */
-public class ReportInfo<T> implements Info<T> {
+public class Compat_ReportInfo<T> implements Compat_Info<T> {
 
-  private final Files files;
-  private final Sheets sheets;
-  private final Collections<T> collections;   
+  private final Compat_Files files;
+  private final Compat_Sheets sheets;
+  private final Compat_Collections<T> collections;
   
-  public ReportInfo(Files files, Sheets sheets, Collections<T> collections) {
+  public Compat_ReportInfo(Compat_Files files, Compat_Sheets sheets, Compat_Collections<T> collections) {
     this.files = files;
     this.sheets = sheets;
     this.collections = collections;
   }
 
   @Override
-  public Files files() {
+  public Compat_Files files() {
     return files;
   } 
 
   @Override
-  public Sheets sheets() {
+  public Compat_Sheets sheets() {
     return sheets;
   }
 
   @Override
-  public Collections<T> collections() {
+  public Compat_Collections<T> collections() {
     return collections;
   }
 }

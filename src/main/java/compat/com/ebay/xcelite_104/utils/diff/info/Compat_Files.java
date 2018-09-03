@@ -13,30 +13,30 @@
    See the License for the specific language governing permissions and
    limitations under the License.
 */
-package compat.com.ebay.xcelite_104.converters;
+package compat.com.ebay.xcelite_104.utils.diff.info;
 
 /**
- * Abstraction of generic column value converter.
- * 
+ * Class description...
+ *
  * @author kharel (kharel@ebay.com)
- * creation_date Sep 12, 2013
+ * creation_date Nov 21, 2013
  * 
  */
-public interface ColumnValueConverter<T, V> {
+public class Compat_Files {
 
-  /**
-   * Serializes given value to a different type.
-   * 
-   * @param value the value to serialize
-   * @return the serialized value
-   */
-  T serialize(V value);
-  
-  /**
-   * Deserializes given value to a different type.
-   * 
-   * @param value the value to deserialize
-   * @return the deserialized value
-   */
-  V deserialize(T value);
+  private final String aFile;
+  private final String bFile;
+
+  public Compat_Files(String aFile, String bFile) {
+    this.aFile = aFile;
+    this.bFile = bFile;
+  }
+
+  public String aFile() {
+    return aFile;
+  }
+
+  public String bFile() {
+    return bFile;
+  }  
 }

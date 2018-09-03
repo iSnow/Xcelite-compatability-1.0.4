@@ -24,27 +24,27 @@ import java.util.LinkedHashSet;
 import java.util.Map;
 import java.util.Set;
 
-import compat.com.ebay.xcelite_104.annotate.NoConverterClass;
-import compat.com.ebay.xcelite_104.converters.ColumnValueConverter;
+import compat.com.ebay.xcelite_104.annotate.Compat_NoConverterClass;
+import compat.com.ebay.xcelite_104.converters.Compat_ColumnValueConverter;
 import compat.com.ebay.xcelite_104.sheet.Compat_XceliteSheet;
 import org.apache.poi.ss.usermodel.Cell;
 import org.reflections.ReflectionUtils;
 
-import compat.com.ebay.xcelite_104.column.Col;
-import compat.com.ebay.xcelite_104.column.ColumnsExtractor;
+import compat.com.ebay.xcelite_104.column.Compat_Col;
+import compat.com.ebay.xcelite_104.column.Compat_ColumnsExtractor;
 import compat.com.ebay.xcelite_104.styles.Compat_CellStylesBank;
 import com.google.common.collect.Sets;
 
 public class Compat_BeanSheetWriter<T> extends Compat_SheetWriterAbs<T> {
 
-  private final LinkedHashSet<Col> columns;
-  private final Col anyColumn;
+  private final LinkedHashSet<Compat_Col> columns;
+  private final Compat_Col anyColumn;
   private org.apache.poi.ss.usermodel.Row headerRow;
   private int rowIndex = 0;
 
   public Compat_BeanSheetWriter(Compat_XceliteSheet sheet, Class<T> type) {
     super(sheet, true);
-    ColumnsExtractor extractor = new ColumnsExtractor(type);
+    Compat_ColumnsExtractor extractor = new Compat_ColumnsExtractor(type);
     extractor.extract();
     columns = extractor.getColumns();
     anyColumn = extractor.getAnyColumn();
@@ -61,7 +61,7 @@ public class Compat_BeanSheetWriter<T> extends Compat_SheetWriterAbs<T> {
   @SuppressWarnings("unchecked")
   private void writeData(Collection<T> data) {
     try {
-      Set<Col> columnsToAdd = Sets.newTreeSet();
+      Set<Compat_Col> columnsToAdd = Sets.newTreeSet();
       for (T t : data) {
         if (anyColumn != null) {
           appendAnyColumns(t, columnsToAdd);
@@ -71,7 +71,7 @@ public class Compat_BeanSheetWriter<T> extends Compat_SheetWriterAbs<T> {
       for (T t : data) {
         org.apache.poi.ss.usermodel.Row row = sheet.getNativeSheet().createRow(rowIndex);
         int i = 0;
-        for (Col col : columns) {
+        for (Compat_Col col : columns) {
           Set<Field> fields = ReflectionUtils.getAllFields(t.getClass(), withName(col.getFieldName()));
           Field field = fields.iterator().next();
           field.setAccessible(true);
@@ -98,14 +98,14 @@ public class Compat_BeanSheetWriter<T> extends Compat_SheetWriterAbs<T> {
   }
 
   @SuppressWarnings("unchecked")
-  private void writeToCell(Cell cell, Col col, Object fieldValueObj) {
+  private void writeToCell(Cell cell, Compat_Col col, Object fieldValueObj) {
     if (fieldValueObj == null) {
       cell.setCellValue((String) null);
       return;
     }
     if (col.getConverter() != null) {
       try {
-        ColumnValueConverter<?, Object> converter = (ColumnValueConverter<?, Object>) col.getConverter().newInstance();
+        Compat_ColumnValueConverter<?, Object> converter = (Compat_ColumnValueConverter<?, Object>) col.getConverter().newInstance();
         fieldValueObj = converter.serialize(fieldValueObj);
       } catch (InstantiationException e) {
         throw new RuntimeException(e);
@@ -134,17 +134,17 @@ public class Compat_BeanSheetWriter<T> extends Compat_SheetWriterAbs<T> {
   }
 
   @SuppressWarnings("unchecked")
-  private void appendAnyColumns(T t, Set<Col> columnToAdd) {
+  private void appendAnyColumns(T t, Set<Compat_Col> columnToAdd) {
     try {
       Set<Field> fields = ReflectionUtils.getAllFields(t.getClass(), withName(anyColumn.getFieldName()));
       Field anyColumnField = fields.iterator().next();
       anyColumnField.setAccessible(true);
       Map<String, Object> fieldValueObj = (Map<String, Object>) anyColumnField.get(t);
       for (Map.Entry<String, Object> entry : fieldValueObj.entrySet()) {
-        Col column = new Col(entry.getKey(), anyColumnField.getName());
+        Compat_Col column = new Compat_Col(entry.getKey(), anyColumnField.getName());
         column.setType(entry.getValue() == null ? String.class : entry.getValue().getClass());
         column.setAnyColumn(true);
-        if (anyColumn.getConverter() != NoConverterClass.class) {
+        if (anyColumn.getConverter() != Compat_NoConverterClass.class) {
           column.setConverter(anyColumn.getConverter());
         }
         columnToAdd.add(column);
@@ -158,9 +158,9 @@ public class Compat_BeanSheetWriter<T> extends Compat_SheetWriterAbs<T> {
     }
   }  
 
-  private void addColumns(Set<Col> columnsToAdd, boolean append) {
+  private void addColumns(Set<Compat_Col> columnsToAdd, boolean append) {
     int i = (headerRow == null || headerRow.getLastCellNum() == -1) ? 0 : headerRow.getLastCellNum();
-    for (Col column : columnsToAdd) {
+    for (Compat_Col column : columnsToAdd) {
       if (append && columns.contains(column))
         continue;
       if (writeHeader) {

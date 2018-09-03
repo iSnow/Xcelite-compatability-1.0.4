@@ -19,16 +19,16 @@ import java.util.Collection;
 
 import javax.annotation.Nonnull;
 
-import compat.com.ebay.xcelite_104.utils.diff.info.Sheets;
+import compat.com.ebay.xcelite_104.utils.diff.info.Compat_Sheets;
 import org.apache.commons.collections.CollectionUtils;
 
 import compat.com.ebay.xcelite_104.reader.Compat_SheetReader;
-import compat.com.ebay.xcelite_104.utils.diff.info.Collections;
-import compat.com.ebay.xcelite_104.utils.diff.info.Files;
-import compat.com.ebay.xcelite_104.utils.diff.info.Info;
-import compat.com.ebay.xcelite_104.utils.diff.report.NewLineDecorator;
-import compat.com.ebay.xcelite_104.utils.diff.report.ReportGenerator;
-import compat.com.ebay.xcelite_104.utils.diff.report.ReportInfo;
+import compat.com.ebay.xcelite_104.utils.diff.info.Compat_Collections;
+import compat.com.ebay.xcelite_104.utils.diff.info.Compat_Files;
+import compat.com.ebay.xcelite_104.utils.diff.info.Compat_Info;
+import compat.com.ebay.xcelite_104.utils.diff.report.Compat_NewLineDecorator;
+import compat.com.ebay.xcelite_104.utils.diff.report.Compat_ReportGenerator;
+import compat.com.ebay.xcelite_104.utils.diff.report.Compat_ReportInfo;
 
 /**
  * Utility which compares two sheets and returns the difference between them.
@@ -69,14 +69,14 @@ public final class Compat_XceliteDiff {
    */
   @SuppressWarnings("unchecked")
   public static <T> Compat_DiffResult<T> diff(@Nonnull Compat_SheetReader<T> a, @Nonnull Compat_SheetReader<T> b,
-                                              ReportGenerator reportGenerator) {
+                                              Compat_ReportGenerator reportGenerator) {
     Collection<T> ca = a.read();
     Collection<T> cb = b.read();
     Collection<T> disjunction = CollectionUtils.disjunction(ca, cb);
-    Info<T> info = new ReportInfo<T>(new Files(a.getSheet().getFile().getAbsolutePath(), b.getSheet().getFile()
-        .getAbsolutePath()), new Sheets(a.getSheet().getNativeSheet().getSheetName(), b.getSheet().getNativeSheet()
-        .getSheetName()), new Collections<T>(ca, cb, disjunction));
-    ReportGenerator reporter;
+    Compat_Info<T> info = new Compat_ReportInfo<T>(new Compat_Files(a.getSheet().getFile().getAbsolutePath(), b.getSheet().getFile()
+        .getAbsolutePath()), new Compat_Sheets(a.getSheet().getNativeSheet().getSheetName(), b.getSheet().getNativeSheet()
+        .getSheetName()), new Compat_Collections<T>(ca, cb, disjunction));
+    Compat_ReportGenerator reporter;
     if (reportGenerator != null) {
       reporter = reportGenerator;
     } else {
@@ -113,27 +113,27 @@ public final class Compat_XceliteDiff {
     }
   }
 
-  private static class SimpleReportGenerator implements ReportGenerator {
+  private static class SimpleReportGenerator implements Compat_ReportGenerator {
     @Override
-    public <T> String generateReport(Info<T> info) {
+    public <T> String generateReport(Compat_Info<T> info) {
       StringBuilder sb = new StringBuilder();
       sb.append("File " + info.files().aFile() + ", ");
       sb.append("Sheet: " + info.sheets().aSheetname() + ", ");
       sb.append(String.format("items (%s):" + NEW_LINE, info.collections().a().size()));
       sb.append(NEW_LINE);
-      sb.append(new NewLineDecorator<T>(info.collections().a()));
+      sb.append(new Compat_NewLineDecorator<T>(info.collections().a()));
       sb.append(NEW_LINE);
 
       sb.append("File " + info.files().bFile() + ", ");
       sb.append("Sheet: " + info.sheets().bSheetname() + ", ");
       sb.append(String.format("items (%s):" + NEW_LINE, info.collections().b().size()));
       sb.append(NEW_LINE);
-      sb.append(new NewLineDecorator<T>(info.collections().b()));
+      sb.append(new Compat_NewLineDecorator<T>(info.collections().b()));
       sb.append(NEW_LINE);
 
       sb.append(String.format("Difference (%s):" + NEW_LINE, info.collections().difference().size()));
       sb.append(NEW_LINE);
-      sb.append(new NewLineDecorator<T>(info.collections().difference()));
+      sb.append(new Compat_NewLineDecorator<T>(info.collections().difference()));
       return sb.toString();
     }
   }

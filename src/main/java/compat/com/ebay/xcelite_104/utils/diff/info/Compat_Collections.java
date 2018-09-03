@@ -13,9 +13,9 @@
    See the License for the specific language governing permissions and
    limitations under the License.
 */
-package compat.com.ebay.xcelite_104.utils.diff.report;
+package compat.com.ebay.xcelite_104.utils.diff.info;
 
-import compat.com.ebay.xcelite_104.utils.diff.info.Info;
+import java.util.Collection;
 
 /**
  * Class description...
@@ -24,7 +24,27 @@ import compat.com.ebay.xcelite_104.utils.diff.info.Info;
  * creation_date Nov 21, 2013
  * 
  */
-public interface ReportGenerator {
+public class Compat_Collections<T> {
 
-  <T> String generateReport(Info<T> info);
+  private final Collection<T> a;
+  private final Collection<T> b;
+  private final Collection<T> difference;
+  
+  public Compat_Collections(Collection<T> a, Collection<T> b, Collection<T> difference) {
+    this.a = a;
+    this.b = b;
+    this.difference = difference;
+  }
+
+  public Collection<T> a() {
+    return a;
+  }
+
+  public Collection<T> b() {
+    return b;
+  }
+
+  public Collection<T> difference() {
+    return difference;
+  }  
 }

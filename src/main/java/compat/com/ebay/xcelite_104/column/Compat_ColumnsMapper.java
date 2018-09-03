@@ -13,38 +13,32 @@
    See the License for the specific language governing permissions and
    limitations under the License.
 */
-package compat.com.ebay.xcelite_104.utils.diff.info;
+package compat.com.ebay.xcelite_104.column;
 
-import java.util.Collection;
+import java.util.Map;
+import java.util.Set;
+
+import com.google.common.collect.Maps;
 
 /**
  * Class description...
- *
+ * 
  * @author kharel (kharel@ebay.com)
- * creation_date Nov 21, 2013
+ * creation_date Nov 5, 2013
  * 
  */
-public class Collections<T> {
+public class Compat_ColumnsMapper {
 
-  private final Collection<T> a;
-  private final Collection<T> b;
-  private final Collection<T> difference;
+  private final Map<String, Compat_Col> columnsMap;
+
+  public Compat_ColumnsMapper(Set<Compat_Col> columns) {
+    columnsMap = Maps.newHashMap();
+    for (Compat_Col col : columns) {
+      columnsMap.put(col.getName(), col);
+    }
+  } 
   
-  public Collections(Collection<T> a, Collection<T> b, Collection<T> difference) {
-    this.a = a;
-    this.b = b;
-    this.difference = difference;
+  public Compat_Col getColumn(String name) {
+    return columnsMap.get(name);
   }
-
-  public Collection<T> a() {
-    return a;
-  }
-
-  public Collection<T> b() {
-    return b;
-  }
-
-  public Collection<T> difference() {
-    return difference;
-  }  
 }

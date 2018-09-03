@@ -22,8 +22,8 @@ import java.lang.annotation.Target;
 import java.util.HashMap;
 import java.util.Map;
 
-import compat.com.ebay.xcelite_104.annotate.NoConverterClass;
-import compat.com.ebay.xcelite_104.converters.ColumnValueConverter;
+import compat.com.ebay.xcelite_104.annotate.Compat_NoConverterClass;
+import compat.com.ebay.xcelite_104.converters.Compat_ColumnValueConverter;
 
 /**
  * Annotation to annotate a {@link java.util.Map Map} field which represents K/V
@@ -36,16 +36,16 @@ import compat.com.ebay.xcelite_104.converters.ColumnValueConverter;
  */
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ ElementType.FIELD })
-public @interface AnyColumn {
+public @interface Compat_AnyColumn {
   
   /**
    * A converter class to use when serializing/deserializing the date to/from
    * excel file. Converter class must implement
-   * {@link ColumnValueConverter
+   * {@link Compat_ColumnValueConverter
    * ColumnValueConverter}. Default is no converter.
    * @return asd
    */
-  Class<? extends ColumnValueConverter<?, ?>> converter() default NoConverterClass.class;  
+  Class<? extends Compat_ColumnValueConverter<?, ?>> converter() default Compat_NoConverterClass.class;
   
   /**
    * Type to deserialize to. Default is {@link java.util.HashMap HashMap}.

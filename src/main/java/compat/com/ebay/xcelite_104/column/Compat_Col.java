@@ -15,7 +15,7 @@
 */
 package compat.com.ebay.xcelite_104.column;
 
-import compat.com.ebay.xcelite_104.converters.ColumnValueConverter;
+import compat.com.ebay.xcelite_104.converters.Compat_ColumnValueConverter;
 
 /**
  * Represents a Column object which holds all data about the Excel column.
@@ -24,20 +24,20 @@ import compat.com.ebay.xcelite_104.converters.ColumnValueConverter;
  * creation_date Aug 29, 2013
  * 
  */
-public class Col implements Comparable<Col> {
+public class Compat_Col implements Comparable<Compat_Col> {
 
   private final String name;
   private String fieldName;
   private Class<?> type;
   private String dataFormat;
-  private Class<? extends ColumnValueConverter<?, ?>> converter;
+  private Class<? extends Compat_ColumnValueConverter<?, ?>> converter;
   private boolean isAnyColumn = false;
 
-  public Col(String name) {
+  public Compat_Col(String name) {
     this(name, null);
   }
 
-  public Col(String name, String fieldName) {
+  public Compat_Col(String name, String fieldName) {
     this.name = name;
     this.fieldName = fieldName;
     type = String.class;
@@ -48,7 +48,7 @@ public class Col implements Comparable<Col> {
     return "name=" + name + ",fieldName=" + fieldName + ",type=" + type + ",converter=" + converter;
   }
 
-  public void copyTo(Col col) {
+  public void copyTo(Compat_Col col) {
     col.fieldName = fieldName;
     col.type = type;
     col.dataFormat = dataFormat;
@@ -83,11 +83,11 @@ public class Col implements Comparable<Col> {
     this.dataFormat = dataFormat;
   }
 
-  public Class<? extends ColumnValueConverter<?, ?>> getConverter() {
+  public Class<? extends Compat_ColumnValueConverter<?, ?>> getConverter() {
     return converter;
   }
 
-  public void setConverter(Class<? extends ColumnValueConverter<?, ?>> converter) {
+  public void setConverter(Class<? extends Compat_ColumnValueConverter<?, ?>> converter) {
     this.converter = converter;
   }
 
@@ -115,7 +115,7 @@ public class Col implements Comparable<Col> {
       return false;
     if (getClass() != obj.getClass())
       return false;
-    Col other = (Col) obj;
+    Compat_Col other = (Compat_Col) obj;
     if (name == null) {
       if (other.name != null)
         return false;
@@ -125,7 +125,7 @@ public class Col implements Comparable<Col> {
   }
 
   @Override
-  public int compareTo(Col o) {
+  public int compareTo(Compat_Col o) {
     return this.getName().compareTo(o.getName());
   }
 }

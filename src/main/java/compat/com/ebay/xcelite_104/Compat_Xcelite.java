@@ -28,7 +28,7 @@ import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
-import compat.com.ebay.xcelite_104.exceptions.XceliteException;
+import compat.com.ebay.xcelite_104.exceptions.Compat_XceliteException;
 
 /**
  * Class description...
@@ -85,7 +85,7 @@ public class Compat_Xcelite {
   public Compat_XceliteSheet getSheet(int sheetIndex) {
     Sheet sheet = workbook.getSheetAt(sheetIndex);
     if (sheet == null) {
-      throw new XceliteException(String.format("Could not find sheet at index %s", sheetIndex));
+      throw new Compat_XceliteException(String.format("Could not find sheet at index %s", sheetIndex));
     }
     return new Compat_XceliteSheetImpl(sheet, file);
   }
@@ -99,7 +99,7 @@ public class Compat_Xcelite {
   public Compat_XceliteSheet getSheet(String sheetName) {
     Sheet sheet = workbook.getSheet(sheetName);
     if (sheet == null) {
-      throw new XceliteException(String.format("Could not find sheet named \"%s\"", sheetName));
+      throw new Compat_XceliteException(String.format("Could not find sheet named \"%s\"", sheetName));
     }
     return new Compat_XceliteSheetImpl(sheet, file);
   }
@@ -110,7 +110,7 @@ public class Compat_Xcelite {
    */
   public void write() {
     if (file == null) {
-      throw new XceliteException("No file given in Xcelite object construction. Consider using method write(file)");
+      throw new Compat_XceliteException("No file given in Xcelite object construction. Consider using method write(file)");
     }
     write(file);
   }

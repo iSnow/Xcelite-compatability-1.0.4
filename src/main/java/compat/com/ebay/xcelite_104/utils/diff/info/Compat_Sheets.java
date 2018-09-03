@@ -22,12 +22,12 @@ package compat.com.ebay.xcelite_104.utils.diff.info;
  * creation_date Nov 21, 2013
  * 
  */
-public class Sheets {
+public class Compat_Sheets {
 
   private final String aSheetname;
   private final String bSheetname;
 
-  public Sheets(String aSheetname, String bSheetname) {
+  public Compat_Sheets(String aSheetname, String bSheetname) {
     this.aSheetname = aSheetname;
     this.bSheetname = bSheetname;
   }

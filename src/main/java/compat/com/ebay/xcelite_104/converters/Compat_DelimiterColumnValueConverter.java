@@ -27,7 +27,7 @@ import com.google.common.base.Splitter;
  * creation_date Sep 14, 2013
  * 
  */
-public abstract class DelimiterColumnValueConverter implements ColumnValueConverter<String, Collection<?>> {
+public abstract class Compat_DelimiterColumnValueConverter implements Compat_ColumnValueConverter<String, Collection<?>> {
 
   @Override
   public String serialize(Collection<?> value) {

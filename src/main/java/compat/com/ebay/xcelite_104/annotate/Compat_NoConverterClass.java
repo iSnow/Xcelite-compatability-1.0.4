@@ -13,32 +13,26 @@
    See the License for the specific language governing permissions and
    limitations under the License.
 */
-package compat.com.ebay.xcelite_104.column;
+package compat.com.ebay.xcelite_104.annotate;
 
-import java.util.Map;
-import java.util.Set;
-
-import com.google.common.collect.Maps;
+import compat.com.ebay.xcelite_104.converters.Compat_ColumnValueConverter;
 
 /**
- * Class description...
+ * Marker class.
  * 
  * @author kharel (kharel@ebay.com)
- * creation_date Nov 5, 2013
+ * creation_date Sep 12, 2013
  * 
  */
-public class ColumnsMapper {
+public final class Compat_NoConverterClass implements Compat_ColumnValueConverter<Object, Object> {
 
-  private final Map<String, Col> columnsMap;
+  @Override
+  public Object serialize(Object value) {
+    return value;
+  }
 
-  public ColumnsMapper(Set<Col> columns) {
-    columnsMap = Maps.newHashMap();
-    for (Col col : columns) {
-      columnsMap.put(col.getName(), col);
-    }
-  } 
-  
-  public Col getColumn(String name) {
-    return columnsMap.get(name);
+  @Override
+  public Object deserialize(Object value) {
+    return value;
   }
 }

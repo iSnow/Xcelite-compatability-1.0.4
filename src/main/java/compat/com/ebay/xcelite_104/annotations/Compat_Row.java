@@ -28,11 +28,11 @@ import java.lang.annotation.Target;
  */
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ ElementType.TYPE })
-public @interface Row {
+public @interface Compat_Row {
 
   /**
    * Specifies the order for the Columns in excel file. The colsOrder is a list
-   * of fields annotated with the {@link Column
+   * of fields annotated with the {@link Compat_Column
    * Column} annotation. Once specified, all Column fields must be listed.
    * @return asd
    */
