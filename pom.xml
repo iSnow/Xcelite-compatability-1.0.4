@@ -2,7 +2,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>compat.com.ebay</groupId>
 	<artifactId>xcelite-104-compatability</artifactId>
-	<version>1.0.4.3-SNAPSHOT</version>
+	<version>1.0.4.5-SNAPSHOT</version>
 	<packaging>jar</packaging>
 	<name>xcelite-compat</name>
 	<description>Xcelite is an ORM like Java library which allows you to easily serialize and deserialize Java beans to/from Excel spreadsheets</description>
