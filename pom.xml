@@ -1,7 +1,7 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>compat.com.ebay</groupId>
-	<artifactId>xcelite-104-compatability</artifactId>
+	<artifactId>xcelite-104-compatibility</artifactId>
 	<version>1.0.4.5-SNAPSHOT</version>
 	<packaging>jar</packaging>
 	<name>xcelite-compat</name>
@@ -26,7 +26,7 @@
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<apache-poi.version>3.17</apache-poi.version>
+		<apache-poi.version>3.9</apache-poi.version>
 	</properties>
 
 	<build>
