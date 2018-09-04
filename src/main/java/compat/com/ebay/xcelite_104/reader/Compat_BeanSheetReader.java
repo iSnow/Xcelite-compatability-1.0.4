@@ -81,7 +81,7 @@ public class Compat_BeanSheetReader<T> extends Compat_SheetReaderAbs<T> {
         
         int i = 0;
         for (String columnName : header) {
-          Cell cell = row.getCell(i, Row.RETURN_BLANK_AS_NULL);
+          Cell cell = row.getCell(i, Row.MissingCellPolicy.RETURN_BLANK_AS_NULL);
           Compat_Col col = mapper.getColumn(columnName);
           if (col == null) {            
             if (anyColumn != null) {

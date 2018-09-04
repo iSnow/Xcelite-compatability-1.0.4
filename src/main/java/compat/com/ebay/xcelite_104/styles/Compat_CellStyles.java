@@ -41,7 +41,7 @@ public final class Compat_CellStyles {
   private void createBoldStyle() {
     boldStyle = wb.createCellStyle();
     Font font = wb.createFont();
-    font.setBoldweight(Font.BOLDWEIGHT_BOLD);
+    font.setBold(true);
     boldStyle.setFont(font);    
   }
   
