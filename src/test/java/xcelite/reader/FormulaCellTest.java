@@ -54,9 +54,9 @@ public class FormulaCellTest {
         ArrayList<FormulaUserBean> upper = new ArrayList<FormulaUserBean>(beanReader.read());
 
         FormulaUserBean first = upper.get(0);
-        assertEquals(testData[0][4], first.getSex(), "Gender mismatch");
+        assertEquals("Gender mismatch", testData[0][4], first.getSex());
 
         FormulaUserBean second = upper.get(1);
-        assertEquals(testData[1][4], second.getSex(), "Gender mismatch");
+        assertEquals("Gender mismatch", testData[1][4], second.getSex());
     }
 }

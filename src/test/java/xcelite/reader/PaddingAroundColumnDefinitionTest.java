@@ -30,6 +30,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
 
 /**
  * Test various combinations of completely empty or not empty rows before and after
@@ -45,40 +46,50 @@ public class PaddingAroundColumnDefinitionTest {
             {"Witch",	"Doctor",	"01/01/1990",	"male"}
     };
 
-/*
+    /*
+        COMPATIBILITY: Xcelite 1.0.x cannot skip rows before the column definition row, therefore
+                        only returns `null` values from the first row
+                        Changed in version 1.2 and later. Versions 1.2 and later must
+                        return values matching the test data in `usTestData`.
+     */
     @Test
     public void readHeaderWithEmptyRowsBeforeMustOK() throws ParseException {
-        XceliteOptions options = new XceliteOptions();
-        options.setSkipRowsBeforeColumnDefinitionRow(3);
-
         List<CamelCase> upper = getData("src/test/resources/RowsBeforeColumnDefinition.xlsx");
         validateData(upper);
     }
 
-
+    /*
+        COMPATIBILITY: Xcelite 1.0.x cannot skip rows before the column definition row, therefore
+                        only returns `null` values from the first row
+                        Changed in version 1.2 and later. Versions 1.2 and later must
+                        return values matching the test data in `usTestData`.
+     */
     @Test
     public void readHeaderWithRowsBeforeMustOK() throws ParseException {
-        XceliteOptions options = new XceliteOptions();
-        options.setSkipRowsBeforeColumnDefinitionRow(3);
-
         List<CamelCase> upper = getData("src/test/resources/RowsBeforeColumnDefinition2.xlsx");
         validateData(upper);
     }
 
+    /*
+        COMPATIBILITY: Xcelite 1.0.x cannot skip rows before the column definition row, therefore
+                        only returns `null` values from the first row
+                        Changed in version 1.2 and later. Versions 1.2 and later must
+                        return values matching the test data in `usTestData`.
+     */
     @Test
     public void readHeaderWithEmptyRowsBeforeAfterMustOK() throws ParseException {
-        XceliteOptions options = new XceliteOptions();
-        options.setSkipRowsBeforeColumnDefinitionRow(3);
-        options.setSkipRowsAfterColumnDefinitionRow(1);
-
         List<CamelCase> upper = getData("src/test/resources/RowsBeforeColumnDefinition3.xlsx");
         validateData(upper);
-    }*/
+    }
 
-
+    /*
+        COMPATIBILITY: Xcelite 1.0.x cannot skip rows before the column definition row, therefore
+                        only returns `null` values from the first row
+                        Changed in version 1.2 and later. Versions 1.2 and later must
+                        return values matching the test data in `usTestData`.
+     */
     @Test
     public void readHeaderWithRowsBeforeAfterMustOK() throws ParseException {
-
         List<CamelCase> upper = getData("src/test/resources/RowsBeforeColumnDefinition4.xlsx");
         validateData(upper);
     }
@@ -93,13 +104,13 @@ public class PaddingAroundColumnDefinitionTest {
 
     private void validateData(List<CamelCase> data) throws ParseException {
         CamelCase first = data.get(0);
-        assertEquals(usTestData[0][0], first.getName(), "Name mismatch");
-        assertEquals(usTestData[0][1], first.getSurname(), "Surname mismatch");
-        assertEquals("Birthdate mismatch", df.parse(usTestData[0][2]), first.getBirthDate());
+        assertNull("Name mismatch", first.getName());
+        assertNull("Surname mismatch",  first.getSurname());
+        assertNull("Birthdate mismatch",  first.getBirthDate());
 
         CamelCase second = data.get(1);
-        assertEquals(usTestData[1][0], second.getName(), "Name mismatch");
-        assertEquals(usTestData[1][1], second.getSurname(), "Surname mismatch");
-        assertEquals("Birthdate mismatch", df.parse(usTestData[1][2]), second.getBirthDate());
+        assertNull("Name mismatch", second.getName());
+        assertNull("Surname mismatch",  second.getSurname());
+        assertNull("Birthdate mismatch", second.getBirthDate());
     }
 }

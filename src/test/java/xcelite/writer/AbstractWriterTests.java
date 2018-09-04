@@ -17,15 +17,22 @@ public class AbstractWriterTests extends AbstractTestBaseForWriterTests {
         setup(bean);
     }
 
+    /*
+    COMPATIBILITY: version 1.0.x writes boolean types as String,
+                   version 1.2 and later must write boolean as Boolean cells
+    */
     @Test
     public void mustWriteBooleanSimpleTypeOK() throws Exception {
         Map<String, Object> columnsMap = extractCellValues (workbook);
         boolean val = bean.isBooleanSimpleType();
         Object obj = columnsMap.get("booleanSimpleType");
-        assertEquals("Values of type boolean must be written as Boolean", Boolean.class, obj.getClass());
-        assertEquals(val, obj);
+        assertEquals("Values of type boolean must be written as Boolean", String.class, obj.getClass());
+        assertEquals(Boolean.toString(val), obj);
     }
 
+    /*
+    COMPATIBILITY: version 1.0.x passes, version 1.2 and later must conform
+    */
     @Test
     public void mustWriteBooleanObjectTypeOK() throws Exception {
         Map<String, Object> columnsMap = extractCellValues (workbook);
@@ -35,6 +42,9 @@ public class AbstractWriterTests extends AbstractTestBaseForWriterTests {
         assertEquals(val, obj);
     }
 
+    /*
+    COMPATIBILITY: version 1.0.x passes, version 1.2 and later must conform
+    */
     @Test
     public void mustWriteStringOK() throws Exception {
         Map<String, Object> columnsMap = extractCellValues (workbook);

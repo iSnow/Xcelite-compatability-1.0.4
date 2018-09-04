@@ -31,6 +31,7 @@ import java.util.Collection;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 
 /**
@@ -48,6 +49,11 @@ public class AnyColumnTest {
             {"Witch",	"Doctor",	"01/01/1990",	1.0,	"Male"}
     };
 
+    /*
+        COMPATIBILITY: ColumnsMapper creates a HashMap of header columns, therefore
+                        the order is not guaranteed.
+                        Changed in version 1.2 and later
+     */
     @Test
     public void mustReadColumnHeadersOK() {
         List<String> testColNames = new ArrayList<String>(Arrays.asList(columnNames));
@@ -58,10 +64,21 @@ public class AnyColumnTest {
         for (AnyColumnBean row : datasets) {
             List<String> dataColNames = new ArrayList<String>(row.getColumns().keySet());
             assertEquals("mismatching number of columns", testColNames.size(), dataColNames.size());
-            assertEquals("mismatching columns", testColNames, dataColNames);
+            for (String col : testColNames) {
+                assertTrue("unknown column", dataColNames.contains(col));
+            }
+            for (String col : dataColNames) {
+                assertTrue("unknown column", testColNames.contains(col));
+            }
         }
     }
 
+
+    /*
+        COMPATIBILITY: ColumnsMapper creates a HashMap of header columns, therefore
+                        the order of data in an AnyColumn is not guaranteed.
+                        Changed in version 1.2 and later
+     */
     @Test
     public void mustReadDataOK() {
         Compat_Xcelite xcelite = new Compat_Xcelite(new File("src/test/resources/UPPERCASE.xlsx"));
@@ -70,14 +87,22 @@ public class AnyColumnTest {
         Collection<AnyColumnBean> datasets = beanReader.read();
         int cnt = 0;
         for (AnyColumnBean row : datasets) {
-            List<Object> testColNames = new ArrayList<Object>(Arrays.asList(testData[cnt++]));
-            List<Object> dataColNames = new ArrayList(row.getColumns().values());
-            assertEquals("mismatching number of columns", testColNames.size(), dataColNames.size());
-            assertEquals("mismatching columns", testColNames, dataColNames);
+            List<Object> testColData = new ArrayList<Object>(Arrays.asList(testData[cnt++]));
+            List<Object> dataColData = new ArrayList(row.getColumns().values());
+            assertEquals("mismatching number of columns", testColData.size(), dataColData.size());
+            for (Object col : testColData) {
+                assertTrue("unknown column", dataColData.contains(col));
+            }
+            for (Object col : dataColData) {
+                assertTrue("unknown column", testColData.contains(col));
+            }
         }
     }
 
-
+    /*
+        COMPATIBILITY: throws an XceliteException.
+                        Must be preserved in later versions
+    */
     @Test(expected = Compat_XceliteException.class)
     @SuppressWarnings("unchecked")
     public void mustThrowOnInvalidBean() {
